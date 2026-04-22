@@ -1,10 +1,20 @@
 # Diagram Design
 
-**I wanted good-looking diagrams for my blog posts.**
+**Editorial diagrams your designer won't hate.**
 
-I write at [littlemight.com](https://littlemight.com). Every time I needed a diagram — an architecture sketch, a flowchart, a pyramid of what matters most — I'd ask Claude and get back a generic rounded-box thing that looked nothing like the rest of the site. I'd either fight with Figma for 30 minutes or just skip the diagram.
+![Content site architecture](docs/screenshots/architecture.png)
 
-So I built a Claude Code skill for it. 13 types, editorial quality, matches your brand in 60 seconds by reading your website.
+14 types. One Claude Code skill. Your brand in 60 seconds — the skill reads your website and maps colors + fonts to every diagram.
+
+No Figma. No generic rounded boxes. No 30-minute color-picking sessions.
+
+---
+
+## Why I built it
+
+I write at [littlemight.com](https://littlemight.com?utm_source=diagram-design&utm_medium=readme&utm_campaign=github&utm_content=intro) (and run [BestSelf.co](https://bestself.co?utm_source=diagram-design&utm_medium=readme&utm_campaign=github&utm_content=intro) on the side). Every time I needed a diagram — an architecture sketch, a flowchart, a pyramid of what matters most — I'd ask Claude and get back a generic rounded-box thing that looked nothing like the rest of the site. I'd either fight with Figma for 30 minutes or just skip the diagram.
+
+So I built a Claude Code skill for it. Fourteen types, editorial quality, matches your brand in 60 seconds by reading your website.
 
 > *The highest-quality move is usually deletion.* Every node earns its place. The accent color is reserved for the 1–2 things the reader should look at first. Target density: 4/10.
 
@@ -12,7 +22,7 @@ So I built a Claude Code skill for it. 13 types, editorial quality, matches your
 
 ## What it makes
 
-All 13 diagrams ship in three variants: minimal light, minimal dark, and full-editorial. Open any of them directly in a browser — no build step, no JS, no external images.
+All 14 diagrams ship in three variants: minimal light, minimal dark, and full-editorial. Open any of them directly in a browser — no build step, no JS, no external images.
 
 <table>
 <tr>
@@ -36,24 +46,25 @@ All 13 diagrams ship in three variants: minimal light, minimal dark, and full-ed
   <td align="center"><img src="docs/screenshots/venn.png" alt="Venn"><br><b>Venn</b><br><sub>Set overlap</sub></td>
 </tr>
 <tr>
-  <td align="center" colspan="3"><img src="docs/screenshots/pyramid.png" alt="Pyramid" width="40%"><br><b>Pyramid / funnel</b><br><sub>Ranked hierarchy or conversion drop-off</sub></td>
+  <td align="center"><img src="docs/screenshots/pyramid.png" alt="Pyramid"><br><b>Pyramid / funnel</b><br><sub>Ranked hierarchy or drop-off</sub></td>
+  <td align="center"><img src="docs/screenshots/quadrant-consultant.png" alt="Consultant 2×2"><br><b>Consultant 2×2</b><br><sub>Scenario matrix · named cells</sub></td>
+  <td align="center">&nbsp;</td>
 </tr>
 </table>
 
-**Browse the live gallery:** open [`skills/diagram-design/assets/index.html`](skills/diagram-design/assets/index.html) in your browser to flip through all 13 types with light / dark / full-editorial tabs.
+**Browse the live gallery:** open [`skills/diagram-design/assets/index.html`](skills/diagram-design/assets/index.html) in your browser to flip through all 14 diagrams with light / dark / full-editorial tabs.
 
 ---
 
 ## Install
 
 ```bash
-# Clone into your Claude Code skills directory
-git clone git@github.com:cathrynlavery/diagram-design.git ~/.claude/skills/diagram-design
-
-# Or if you keep skills elsewhere, symlink it
+# Clone the repo somewhere, then symlink the inner skill into Claude Code's skills dir
 git clone git@github.com:cathrynlavery/diagram-design.git ~/code/diagram-design
-ln -s ~/code/diagram-design ~/.claude/skills/diagram-design
+ln -s ~/code/diagram-design/skills/diagram-design ~/.claude/skills/diagram-design
 ```
+
+The real skill lives at `skills/diagram-design/` inside the repo (so the same tree works as a Claude Code plugin, a Codex plugin, and a standalone skill). The symlink points Claude Code at that inner directory.
 
 Restart Claude Code. The skill registers as `diagram-design` and activates whenever you ask Claude to make a diagram.
 
@@ -69,13 +80,19 @@ Quicker to install — but the skill lives in the plugin cache, so edits to `ref
 
 **Claude Cowork:** Customize → Directory → Plugins → **+** → paste `cathrynlavery/diagram-design` → Sync, then install from the Personal list.
 
+**Codex:**
+```
+/plugin marketplace add cathrynlavery/diagram-design
+/plugin install diagram-design@diagram-design
+```
+
 ---
 
 ## Onboarding — make it look like *your* brand
 
 The whole point: ship editorial-quality diagrams in **your** colors and typography, not a generic template.
 
-Out of the box, diagrams render in a neutral **stone + rust** palette (warm off-white paper, deep charcoal ink, rust-orange accent). Good enough to screenshot straight away. But 60 seconds of onboarding is better — the skill will pull your brand from your website and apply it across every diagram.
+Out of the box, diagrams render in a clean **jet-black + atomic-tangerine** palette (white-smoke paper, jet-black ink, atomic-tangerine accent, blue-slate muted, silver hairlines). Good enough to screenshot straight away. But 60 seconds of onboarding is better — the skill will pull your brand from your website and apply it across every diagram.
 
 ### The flow
 
@@ -111,7 +128,7 @@ Before writing tokens, the skill verifies WCAG AA contrast on `ink` over `paper`
 
 ### Manual override
 
-Prefer to set tokens by hand? Open [`skills/diagram-design/references/style-guide.md`](skills/diagram-design/references/style-guide.md) and edit the table. Everything downstream reads from there — the 13 types, the annotation primitive, and the gallery all inherit semantic role names (`accent`, not `#b5523a`).
+Prefer to set tokens by hand? Open [`skills/diagram-design/references/style-guide.md`](skills/diagram-design/references/style-guide.md) and edit the table. Everything downstream reads from there — all 14 diagrams, the annotation primitive, and the gallery all inherit semantic role names (`accent`, not `#eb6c36`).
 
 ### First-run gate
 
@@ -126,7 +143,7 @@ See [`skills/diagram-design/references/onboarding.md`](skills/diagram-design/ref
 ## Quickstart
 
 ```bash
-# Open the gallery to see all 13 types
+# Open the gallery to see all 14 diagrams
 open ~/.claude/skills/diagram-design/assets/index.html
 
 # In Claude Code, just ask:
@@ -172,7 +189,8 @@ diagram-design/
 ├── assets/
 │   ├── index.html                   — live gallery, tabbed
 │   ├── template*.html               — scaffolds for new diagrams
-│   └── example-<type>.html          — 3 variants × 13 types
+│   ├── example-<type>.html          — 3 variants × 13 types
+│   └── example-quadrant-consultant.html  — consultant-special 2×2 scenario matrix
 └── docs/screenshots/                — the images in this README
 ```
 
@@ -189,7 +207,7 @@ The top-level `SKILL.md` is always in context. Everything else is pulled in only
 | "Onboard this skill to my site" | `SKILL.md` + `references/onboarding.md` + `references/style-guide.md` |
 | "Add an editorial callout to this diagram" | `SKILL.md` + `references/primitive-annotation.md` |
 | "Give me a hand-drawn version" | `SKILL.md` + `references/primitive-sketchy.md` |
-| Routine diagram-making (any of the 13 types) | Only `SKILL.md` + that one type's reference |
+| Routine diagram-making (any of the 14 diagrams) | Only `SKILL.md` + that one type's reference |
 
 No matter how many types exist, Claude only reads the one you need. Add a new type tomorrow and nothing else changes.
 
