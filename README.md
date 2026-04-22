@@ -52,20 +52,19 @@ All 14 diagrams ship in three variants: minimal light, minimal dark, and full-ed
 </tr>
 </table>
 
-**Browse the live gallery:** open [`assets/index.html`](assets/index.html) in your browser to flip through all 14 diagrams with light / dark / full-editorial tabs.
+**Browse the live gallery:** open [`skills/diagram-design/assets/index.html`](skills/diagram-design/assets/index.html) in your browser to flip through all 14 diagrams with light / dark / full-editorial tabs.
 
 ---
 
 ## Install
 
 ```bash
-# Clone into your Claude Code skills directory
-git clone git@github.com:cathrynlavery/diagram-design.git ~/.claude/skills/diagram-design
-
-# Or if you keep skills elsewhere, symlink it
+# Clone the repo somewhere, then symlink the inner skill into Claude Code's skills dir
 git clone git@github.com:cathrynlavery/diagram-design.git ~/code/diagram-design
-ln -s ~/code/diagram-design ~/.claude/skills/diagram-design
+ln -s ~/code/diagram-design/skills/diagram-design ~/.claude/skills/diagram-design
 ```
+
+The real skill lives at `skills/diagram-design/` inside the repo (so the same tree works as a Claude Code plugin, a Codex plugin, and a standalone skill). The symlink points Claude Code at that inner directory.
 
 Restart Claude Code. The skill registers as `diagram-design` and activates whenever you ask Claude to make a diagram.
 
@@ -129,7 +128,7 @@ Before writing tokens, the skill verifies WCAG AA contrast on `ink` over `paper`
 
 ### Manual override
 
-Prefer to set tokens by hand? Open [`references/style-guide.md`](references/style-guide.md) and edit the table. Everything downstream reads from there — all 14 diagrams, the annotation primitive, and the gallery all inherit semantic role names (`accent`, not `#eb6c36`).
+Prefer to set tokens by hand? Open [`skills/diagram-design/references/style-guide.md`](skills/diagram-design/references/style-guide.md) and edit the table. Everything downstream reads from there — all 14 diagrams, the annotation primitive, and the gallery all inherit semantic role names (`accent`, not `#eb6c36`).
 
 ### First-run gate
 
@@ -137,7 +136,7 @@ The skill won't silently ship default-skinned diagrams into a branded project. O
 
 > *"This is your first diagram in this project. The style guide is still at the default. Want to run onboarding, paste tokens manually, or proceed with default?"*
 
-See [`references/onboarding.md`](references/onboarding.md) for the full spec.
+See [`skills/diagram-design/references/onboarding.md`](skills/diagram-design/references/onboarding.md) for the full spec.
 
 ---
 
@@ -216,14 +215,14 @@ No matter how many types exist, Claude only reads the one you need. Add a new ty
 
 ## The design system (in one paragraph)
 
-One accent color, 1–2 focal elements per diagram. Three font families: Instrument Serif (title + italic callouts), Geist sans (node names), Geist Mono (technical sublabels). 1px hairline borders, no shadows, max border-radius 10px. Every coord, width, and gap divisible by 4 — non-negotiable, it's what keeps the diagrams from feeling AI-generated. Mono is for technical content (ports, URLs, field types), not a blanket "dev" aesthetic. Coral-tinted focal nodes draw the eye to the 1–2 things that matter. Full spec in [`SKILL.md`](SKILL.md#5-design-system).
+One accent color, 1–2 focal elements per diagram. Three font families: Instrument Serif (title + italic callouts), Geist sans (node names), Geist Mono (technical sublabels). 1px hairline borders, no shadows, max border-radius 10px. Every coord, width, and gap divisible by 4 — non-negotiable, it's what keeps the diagrams from feeling AI-generated. Mono is for technical content (ports, URLs, field types), not a blanket "dev" aesthetic. Coral-tinted focal nodes draw the eye to the 1–2 things that matter. Full spec in [`SKILL.md`](skills/diagram-design/SKILL.md#5-design-system).
 
 ---
 
 ## Primitives
 
-- **Annotation callout** — italic Instrument Serif + dashed Bézier leader, for editorial asides that sit in the margins. See [`references/primitive-annotation.md`](references/primitive-annotation.md).
-- **Sketchy filter** — SVG turbulence + displacement map for a hand-drawn variant. Good for essays, not for technical docs. See [`references/primitive-sketchy.md`](references/primitive-sketchy.md).
+- **Annotation callout** — italic Instrument Serif + dashed Bézier leader, for editorial asides that sit in the margins. See [`skills/diagram-design/references/primitive-annotation.md`](skills/diagram-design/references/primitive-annotation.md).
+- **Sketchy filter** — SVG turbulence + displacement map for a hand-drawn variant. Good for essays, not for technical docs. See [`skills/diagram-design/references/primitive-sketchy.md`](skills/diagram-design/references/primitive-sketchy.md).
 
 ---
 
